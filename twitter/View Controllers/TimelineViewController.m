@@ -36,6 +36,7 @@
                 NSString *text = tweet.text;
                 NSLog(@"%@", text);
             }
+            [self.tableView reloadData];
         } else {
             NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
         }
@@ -56,7 +57,11 @@
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
     Tweet *tweet = self.tweets[indexPath.row];
 
-    [cell setTweet:tweet];
+    cell.contentLabel.text = tweet.text;
+    cell.dateLabel.text = tweet.createdAtString;
+    cell.usernameLabel.text = tweet.user.name;
+    cell.screennameLabel.text = tweet.user.screenName;
+    // TO DO: Set profile picture
     
     return cell;
 }
