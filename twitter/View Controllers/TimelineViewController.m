@@ -24,23 +24,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // UIRefreshControl
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:refreshControl atIndex:0];
+    
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+
     
     // Get timeline
-    [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
-        if (tweets) {
-            NSLog(@"😎😎😎 Successfully loaded home timeline");
-            self.tweets = (NSMutableArray *)tweets;
-            for (Tweet *tweet in tweets) {
-                NSString *text = tweet.text;
-                NSLog(@"%@", text);
-            }
-            [self.tableView reloadData];
-        } else {
-            NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
-        }
-    }];
+    [self getTimeline];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -64,6 +59,28 @@
     // TO DO: Set profile picture
     
     return cell;
+}
+
+- (void)getTimeline {
+    [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
+        if (tweets) {
+            NSLog(@"😎😎😎 Successfully loaded home timeline");
+            self.tweets = (NSMutableArray *)tweets;
+            for (Tweet *tweet in tweets) {
+                NSString *text = tweet.text;
+                NSLog(@"%@", text);
+            }
+            [self.tableView reloadData];
+        } else {
+            NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
+        }
+    }];
+}
+
+- (void)beginRefresh:(UIRefreshControl *)refreshControl {
+    [self getTimeline];
+    [self.tableView reloadData];
+    [refreshControl endRefreshing];
 }
 
 /*
