@@ -11,10 +11,13 @@
 #import "Tweet.h"
 #import "TweetCell.h"
 #import "ComposeViewController.h"
+#import "AppDelegate.h"
+#import "LoginViewController.h"
 
 @interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 // MARK: Outlets
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *logoutButton;
 
 // MARK: Properties
 @property (nonatomic, strong) NSMutableArray *tweets;
@@ -90,6 +93,16 @@
     [self getTimeline];
     [self.tableView reloadData];
     [refreshControl endRefreshing];
+}
+
+// MARK: IBActions
+- (IBAction)didTapLogout:(UIBarButtonItem *)sender {
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    appDelegate.window.rootViewController = loginViewController;
+    [[APIManager shared] logout];
 }
 
 

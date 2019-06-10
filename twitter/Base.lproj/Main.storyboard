@@ -174,7 +174,11 @@
                         <viewLayoutGuide key="safeArea" id="ugE-Ul-H9I"/>
                     </view>
                     <navigationItem key="navigationItem" title="Home Timeline" id="MOc-fV-EZE">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="qAQ-kz-dep"/>
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="qAQ-kz-dep">
+                            <connections>
+                                <action selector="didTapLogout:" destination="Lbl-k5-U4i" id="gvt-eP-g7T"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Compose" id="qpQ-b1-Qao">
                             <connections>
                                 <segue destination="wwj-oP-j9U" kind="presentation" id="LJx-Ha-ljc"/>
@@ -182,6 +186,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="logoutButton" destination="qAQ-kz-dep" id="om5-jO-xnl"/>
                         <outlet property="tableView" destination="ikf-7f-9Lf" id="xjL-Pg-Gdr"/>
                     </connections>
                 </viewController>
