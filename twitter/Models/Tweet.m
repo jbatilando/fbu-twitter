@@ -11,19 +11,20 @@
 
 @implementation Tweet
 
-- (instancetype)initWithDictionary:(NSDictionary *)dictionary {
+-(instancetype)initWithDictionary:(NSDictionary *)dictionary {
     self = [super init];
     if (self) {
-        
-        // Is this a re-tweet?
+        // is this a re-tweet?
         NSDictionary *originalTweet = dictionary[@"retweeted_status"];
-        if(originalTweet != nil){
+        if(originalTweet != nil) {
             NSDictionary *userDictionary = dictionary[@"user"];
+            // pass the user, and create a new User from this data
             self.retweetedByUser = [[User alloc] initWithDictionary:userDictionary];
             
             // Change tweet to original tweet
             dictionary = originalTweet;
         }
+        // Setting the properties for the Tweet object
         self.idStr = dictionary[@"id_str"];
         self.text = dictionary[@"text"];
         self.favoriteCount = [dictionary[@"favorite_count"] intValue];
@@ -31,7 +32,7 @@
         self.retweetCount = [dictionary[@"retweet_count"] intValue];
         self.retweeted = [dictionary[@"retweeted"] boolValue];
         
-        // initialize user
+        // initialize the user
         NSDictionary *user = dictionary[@"user"];
         self.user = [[User alloc] initWithDictionary:user];
         

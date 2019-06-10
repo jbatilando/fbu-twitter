@@ -52,7 +52,10 @@
     
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
     Tweet *tweet = self.tweets[indexPath.row];
-
+    
+    // Call method for setting Tweet
+    [cell refreshData:tweet];
+    
     cell.contentLabel.text = tweet.text;
     cell.dateLabel.text = tweet.createdAtString;
     cell.usernameLabel.text = tweet.user.name;
@@ -68,8 +71,8 @@
             NSLog(@"😎😎😎 Successfully loaded home timeline");
             self.tweets = (NSMutableArray *)tweets;
             for (Tweet *tweet in tweets) {
-                NSString *text = tweet.text;
-                NSLog(@"%@", text);
+                // NSString *text = tweet.text;
+                // NSLog(@"%@", text);
             }
             [self.tableView reloadData];
         } else {
