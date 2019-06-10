@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		557D7B17F5D2B5715B705AA9 /* libPods-twitter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43D6142D6F34C1AE98EE4951 /* libPods-twitter.a */; };
+		6213040E22AE3200006CD33B /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6213040D22AE3200006CD33B /* ComposeViewController.m */; };
 		6222BEA222AE17CA007B3A1B /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 6222BEA122AE17CA007B3A1B /* User.m */; };
 		6222BEA522AE1835007B3A1B /* Tweet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6222BEA422AE1835007B3A1B /* Tweet.m */; };
 		6222BEA822AE1C8F007B3A1B /* TweetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6222BEA722AE1C8F007B3A1B /* TweetCell.m */; };
@@ -25,6 +26,8 @@
 /* Begin PBXFileReference section */
 		1397EA94AE1DE5F26C1724FD /* Pods-twitter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-twitter.release.xcconfig"; path = "Pods/Target Support Files/Pods-twitter/Pods-twitter.release.xcconfig"; sourceTree = "<group>"; };
 		43D6142D6F34C1AE98EE4951 /* libPods-twitter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-twitter.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6213040C22AE3200006CD33B /* ComposeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComposeViewController.h; sourceTree = "<group>"; };
+		6213040D22AE3200006CD33B /* ComposeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ComposeViewController.m; sourceTree = "<group>"; };
 		6222BEA022AE17CA007B3A1B /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		6222BEA122AE17CA007B3A1B /* User.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		6222BEA322AE1835007B3A1B /* Tweet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tweet.h; sourceTree = "<group>"; };
@@ -140,6 +143,8 @@
 		6AD2790320BCC01B0085BC29 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				6213040C22AE3200006CD33B /* ComposeViewController.h */,
+				6213040D22AE3200006CD33B /* ComposeViewController.m */,
 				6AD2790420BCC0380085BC29 /* LoginViewController.h */,
 				6AD2790520BCC0380085BC29 /* LoginViewController.m */,
 				6AD2790720BCC04D0085BC29 /* TimelineViewController.h */,
@@ -252,6 +257,7 @@
 				6222BEA822AE1C8F007B3A1B /* TweetCell.m in Sources */,
 				6AD278F320BCA6020085BC29 /* BDBOAuth1SessionManager+SFAuthenticationSession.m in Sources */,
 				6222BEA222AE17CA007B3A1B /* User.m in Sources */,
+				6213040E22AE3200006CD33B /* ComposeViewController.m in Sources */,
 				6AD278E820BC4B970085BC29 /* main.m in Sources */,
 				6222BEA522AE1835007B3A1B /* Tweet.m in Sources */,
 				6AD2790620BCC0380085BC29 /* LoginViewController.m in Sources */,
