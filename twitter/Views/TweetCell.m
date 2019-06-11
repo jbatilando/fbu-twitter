@@ -10,6 +10,7 @@
 #import "Tweet.h"
 #import "User.h"
 #import "APIManager.h"
+#import "UIImageView+AFNetworking.h"
 
 @implementation TweetCell
 
@@ -33,6 +34,7 @@
     self.contentLabel.text = tweet.text;
     self.dateLabel.text = tweet.createdAtString;
     self.screennameLabel.text = tweet.user.screenName;
+    [self.avatarImageView setImageWithURL: [tweet.user getAvatarURLString]];
     
     if (_tweet.favorited) {
         [self.likeButton setImage:[UIImage imageNamed:@"favor-icon-red"] forState:UIControlStateNormal];
