@@ -35,6 +35,9 @@
     self.dateLabel.text = tweet.createdAtString;
     self.screennameLabel.text = tweet.user.screenName;
     [self.avatarImageView setImageWithURL: [tweet.user getAvatarURLString]];
+    self.avatarImageView.layer.cornerRadius = 28;
+    self.avatarImageView.layer.masksToBounds = YES;
+    
     
     if (_tweet.favorited) {
         [self.likeButton setImage:[UIImage imageNamed:@"favor-icon-red"] forState:UIControlStateNormal];
