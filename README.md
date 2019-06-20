@@ -21,10 +21,10 @@ The following **required** functionality is completed:
 The following **optional** features are implemented:
 
 - [x] Tweet Details Page: User can tap on a tweet to view it, with controls to retweet and favorite. (reply not available)
-- [ ] User can view their profile in a *profile tab*
+- [x] User can view their profile in a *profile tab*
 - Contains the user header view: picture and tagline
 - Contains a section with the users basic stats: # tweets, # following, # followers
-- [x] Profile view should include that user's timeline
+- [ ] Profile view should include that user's timeline
 - [ ] User should display the relative timestamp for each tweet "8m", "7h"
 - [ ] User should be able to unretweet and unfavorite and should decrement the retweet and favorite count. Refer to [[this guide|unretweeting]] for help on implementing unretweeting.
 - [ ] Links in tweets are clickable.
