@@ -8,6 +8,7 @@
 
 #import "APIManager.h"
 #import "Tweet.h"
+#import "User.h"
 
 static NSString * const baseURLString = @"https://api.twitter.com";
 static NSString * const consumerKey = @"rbNIFbpNJJ14x4MZ9bEB8EpYr";
@@ -51,19 +52,13 @@ static NSString * const consumerSecret = @"kyq66rE7zyg21ak0hSlrRVCOwC5tqND9u8H2D
     
     [self GET:@"1.1/statuses/home_timeline.json"
    parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSArray *  _Nullable tweetDictionaries) {
-       
-       
        // Manually cache the tweets. If the request fails, restore from cache if possible.
        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:tweetDictionaries];
        [[NSUserDefaults standardUserDefaults] setValue:data forKey:@"hometimeline_tweets"];
        NSMutableArray *tweets  = [Tweet tweetsWithArray:tweetDictionaries];
-
        completion(tweets, nil);
-       
    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-       
        NSArray *tweetDictionaries = nil;
-       
        // Fetch tweets from cache if possible
        NSData *data = [[NSUserDefaults standardUserDefaults] valueForKey:@"hometimeline_tweets"];
        if (data != nil) {
@@ -73,7 +68,6 @@ static NSString * const consumerSecret = @"kyq66rE7zyg21ak0hSlrRVCOwC5tqND9u8H2D
        } else {
            completion(nil, error);
        }
-       
    }];
 }
 
@@ -141,4 +135,14 @@ static NSString * const consumerSecret = @"kyq66rE7zyg21ak0hSlrRVCOwC5tqND9u8H2D
     }];
 }
 
+- (void)getUser:(void(^)(User *user, NSError *error))completion{
+    [self GET:@"1.1/account/verify_credentials.json" parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable userObject) {
+        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:userObject];
+        [[NSUserDefaults standardUserDefaults] setValue:data forKey:@"user_info"];
+        User *user  = [[User alloc] initWithDictionary:userObject];
+        completion(user, nil);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"Didn't get user");
+    }];
+}
 @end

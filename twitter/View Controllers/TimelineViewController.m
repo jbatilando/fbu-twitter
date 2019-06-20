@@ -14,6 +14,8 @@
 #import "AppDelegate.h"
 #import "LoginViewController.h"
 #import "DetailsViewController.h"
+#import "User.h"
+#import "ProfileViewController.h"
 
 @interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 // MARK: Outlets
@@ -22,12 +24,23 @@
 
 // MARK: Properties
 @property (nonatomic, strong) NSMutableArray *tweets;
+@property (nonatomic, strong) User *user;
+@property (nonatomic, strong) NSString *profileImageURLString;
 @end
 
 @implementation TimelineViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // Get user
+    [[APIManager shared] getUser:^(User *user, NSError *error) {
+        if (user) {
+            self.user = (User *)user;
+        } else {
+            NSLog(@"error getting user: %@", error.localizedDescription);
+        }
+    }];
     
     // UIRefreshControl
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
@@ -41,6 +54,19 @@
     // Get timeline
     [self getTimeline];
     
+}
+
+-(void) viewWillAppear {
+    // Get user
+    [[APIManager shared] getUser:^(User *user, NSError *error) {
+        if (user) {
+            self.user = (User *)user;
+            NSLog(@"Logged in as: %@", self.user.screenName);
+            NSLog(@"Hello: %@!", self.user.name);
+        } else {
+            NSLog(@"error getting user: %@", error.localizedDescription);
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -97,12 +123,15 @@
 }
 
 // MARK: IBActions
-- (IBAction)didTapLogout:(UIBarButtonItem *)sender {
-    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
-    appDelegate.window.rootViewController = loginViewController;
-    [[APIManager shared] logout];
+//- (IBAction)didTapLogout:(UIBarButtonItem *)sender {
+//    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+//    appDelegate.window.rootViewController = loginViewController;
+//    [[APIManager shared] logout];
+//}
+- (IBAction)didTapProfileButton:(id)sender {
+    [self performSegueWithIdentifier:@"profileSegue" sender:nil];
 }
 
 #pragma mark - Navigation
@@ -120,6 +149,10 @@
         NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
         Tweet *tweet = self.tweets[indexPath.row];
         detailsPostViewController.tweet = tweet;
+    }
+    else if ([[segue identifier] isEqualToString:@"profileSegue"]) {
+        ProfileViewController *profileViewController = [segue destinationViewController];
+        profileViewController.user = self.user;
     }
 }
 

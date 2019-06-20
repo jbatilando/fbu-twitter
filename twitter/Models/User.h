@@ -16,12 +16,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSString *screenName;
 @property (strong, nonatomic) NSString *avatarImageURLString;
+@property (strong, nonatomic) NSString *bannerImageUrlString;
+@property (assign, nonatomic) NSString *tweetCount;
+@property (assign, nonatomic) NSString *followingCount;
+@property (assign, nonatomic) NSString *followersCount;
 
-// Add any additional properties here
-
-// Create initializer
+// Instance methods
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 - (NSURL *) getAvatarURLString;
+- (NSURL *) getBannerURLString;
 @end
 
 NS_ASSUME_NONNULL_END
