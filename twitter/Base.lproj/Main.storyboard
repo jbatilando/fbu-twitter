@@ -366,7 +366,10 @@
                                     <constraint firstAttribute="height" constant="32" id="akC-Hh-bJv"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                <state key="normal" title="Edit Profile"/>
+                                <state key="normal" title="Logout"/>
+                                <connections>
+                                    <action selector="didTapLogout:" destination="JG7-U5-xnM" eventType="touchUpInside" id="7CO-QK-nyQ"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ssk-uk-pzb">
                                 <rect key="frame" x="16" y="306" width="84" height="21"/>

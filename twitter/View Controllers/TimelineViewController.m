@@ -123,13 +123,6 @@
 }
 
 // MARK: IBActions
-//- (IBAction)didTapLogout:(UIBarButtonItem *)sender {
-//    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
-//    appDelegate.window.rootViewController = loginViewController;
-//    [[APIManager shared] logout];
-//}
 - (IBAction)didTapProfileButton:(id)sender {
     [self performSegueWithIdentifier:@"profileSegue" sender:nil];
 }

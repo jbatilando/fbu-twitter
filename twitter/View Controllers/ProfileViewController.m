@@ -9,6 +9,9 @@
 #import "ProfileViewController.h"
 #import "User.h"
 #import "UIImageView+AFNetworking.h"
+#import "AppDelegate.h"
+#import "LoginViewController.h"
+#import "APIManager.h"
 
 @interface ProfileViewController ()
 
@@ -26,6 +29,15 @@
     self.screennameLabel.text = self.user.screenName;
     self.followersCountLabel.text = [NSString stringWithFormat:@"%@",self.user.followersCount];
     self.followingCountLabel.text = [NSString stringWithFormat:@"%@",self.user.followingCount];
+}
+
+// MARK: IBActions
+- (IBAction)didTapLogout:(id)sender {
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    appDelegate.window.rootViewController = loginViewController;
+    [[APIManager shared] logout];
 }
 
 /*
