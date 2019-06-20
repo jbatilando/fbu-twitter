@@ -7,9 +7,11 @@
 //
 
 #import "DetailsViewController.h"
+#import "TweetCell.h"
+#import "UIImageView+AFNetworking.h"
+#import "APIManager.h"
 
 @interface DetailsViewController ()
-
 @end
 
 @implementation DetailsViewController
@@ -17,6 +19,65 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [self.avatarImageView setImageWithURL: [self.tweet.user getAvatarURLString]];
+    self.avatarImageView.layer.cornerRadius = 28;
+    self.avatarImageView.layer.masksToBounds = YES;
+    self.usernameLabel.text = self.tweet.user.name;
+    self.screennameLabel.text = self.tweet.user.screenName;
+    self.tweetLabel.text = self.tweet.text;
+}
+
+// MARK: IBActions
+- (IBAction)didTapRetweet:(id)sender {
+    if (_tweet.retweeted) {
+        [sender setImage:[UIImage imageNamed:@"retweet-icon"] forState:UIControlStateNormal];
+        [[APIManager shared] unRetweet:_tweet completion:^(Tweet *modifiedTweet, NSError *error) {
+            if(error != nil) {
+                [sender setImage:[UIImage imageNamed:@"retweet-icon-green"] forState:UIControlStateNormal];
+                NSLog(@"Error retweeting tweet: %@", error.localizedDescription);
+            } else {
+                NSLog(@"Successfully unretweeted tweet: %@", self.tweet.text);
+            }
+        }];
+    } else {
+        [sender setImage:[UIImage imageNamed:@"retweet-icon-green"] forState:UIControlStateNormal];
+        [[APIManager shared] retweet:_tweet completion:^(Tweet *modifiedTweet, NSError *error) {
+            if(error != nil) {
+                [sender setImage:[UIImage imageNamed:@"retweet-icon"] forState:UIControlStateNormal];
+                NSLog(@"Error unretweeting tweet: %@", error.localizedDescription);
+            } else {
+                NSLog(@"Successfully unretweeted tweet: %@", self.tweet.text);
+            }
+        }];
+    }
+}
+- (IBAction)didTapLike:(id)sender {
+    if (self.tweet.favorited) {
+        [sender setImage:[UIImage imageNamed:@"favor-icon"] forState:UIControlStateNormal];
+        [[APIManager shared] unFavorite:self.tweet completion:^(Tweet *tweet, NSError *error) {
+            if(error){
+                [sender setImage:[UIImage imageNamed:@"favor-icon-red"] forState:UIControlStateNormal];
+                NSLog(@"Error favoriting tweet: %@", error.localizedDescription);
+            }
+            else{
+                NSLog(@"Successfully unfavorited the following Tweet: %@", tweet.text);
+                self.tweet = tweet;
+            }
+        }];
+    } else {
+        [sender setImage:[UIImage imageNamed:@"favor-icon-red"] forState:UIControlStateNormal];
+        [[APIManager shared] favorite:self.tweet completion:^(Tweet *tweet, NSError *error) {
+            if(error){
+                [sender setImage:[UIImage imageNamed:@"favor-icon"] forState:UIControlStateNormal];
+                NSLog(@"Error favoriting tweet: %@", error.localizedDescription);
+            }
+            else{
+                NSLog(@"Successfully favorited the following Tweet: %@", tweet.text);
+                self.tweet = tweet;
+            }
+        }];
+    }
 }
 
 /*
