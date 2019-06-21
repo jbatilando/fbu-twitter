@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ProfileViewController : UIViewController
 // MARK: Properties
 @property (nonatomic, strong) User *user;
+@property (nonatomic, strong) NSMutableArray *tweets;
 
 // MARK: Outlets
 @property (weak, nonatomic) IBOutlet UIImageView *bannerImageView;
@@ -22,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *followingCountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *followersCountLabel;
+
 @end
 
 NS_ASSUME_NONNULL_END

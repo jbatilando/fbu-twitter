@@ -442,7 +442,7 @@
                                 <rect key="frame" x="0.0" y="379" width="375" height="288"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TweetCell2" rowHeight="112" id="ghg-BZ-leG" customClass="TweetCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TweetCell" rowHeight="112" id="ghg-BZ-leG" customClass="TweetCell">
                                         <rect key="frame" x="0.0" y="28" width="375" height="112"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ghg-BZ-leG" id="T9Y-RR-9Wd">
@@ -456,7 +456,7 @@
                                                         <constraint firstAttribute="width" constant="56" id="rWw-Uf-QJD"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is a Tweet!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zpx-A9-HCw">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is a Tweet!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zpx-A9-HCw">
                                                     <rect key="frame" x="70" y="35" width="116" height="20"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                     <nil key="highlightedColor"/>
@@ -536,6 +536,17 @@
                                                 <constraint firstItem="8tu-af-uPL" firstAttribute="leading" secondItem="QPJ-af-aZa" secondAttribute="trailing" constant="24" id="zxC-rX-iC8"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="avatarImageView" destination="apo-wY-qOr" id="B0G-Co-Igs"/>
+                                            <outlet property="contentLabel" destination="zpx-A9-HCw" id="JM8-76-teu"/>
+                                            <outlet property="dateLabel" destination="8tu-af-uPL" id="W5S-mM-Nyi"/>
+                                            <outlet property="likeButton" destination="PIO-4w-A3B" id="qBt-Ka-WIQ"/>
+                                            <outlet property="messageButton" destination="Nse-st-q8Q" id="p8Y-Tf-3KU"/>
+                                            <outlet property="replyButton" destination="R9A-cq-Fzy" id="J9G-94-Q7i"/>
+                                            <outlet property="retweetButton" destination="Xpd-HA-Yp0" id="fit-DE-CaF"/>
+                                            <outlet property="screennameLabel" destination="QPJ-af-aZa" id="G9W-NI-kcd"/>
+                                            <outlet property="usernameLabel" destination="DlH-pu-LhA" id="Ur5-fD-Ap1"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -586,7 +597,7 @@
                         <outlet property="followersCountLabel" destination="4At-vI-Gxr" id="t1Z-yo-hIC"/>
                         <outlet property="followingCountLabel" destination="hK0-nX-J8r" id="CK0-P5-XGo"/>
                         <outlet property="screennameLabel" destination="Pl5-Ko-U6R" id="zx9-e2-pGu"/>
-                        <outlet property="tableView" destination="hT5-6c-iQt" id="N0K-RC-PpC"/>
+                        <outlet property="tableView" destination="hT5-6c-iQt" id="DjQ-wv-NJP"/>
                         <outlet property="usernameLabel" destination="ssk-uk-pzb" id="DVD-e1-l8N"/>
                     </connections>
                 </viewController>

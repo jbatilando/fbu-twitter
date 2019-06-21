@@ -142,6 +142,7 @@
     else if ([[segue identifier] isEqualToString:@"profileSegue"]) {
         ProfileViewController *profileViewController = [segue destinationViewController];
         profileViewController.user = self.user;
+        profileViewController.tweets = self.tweets;
     }
 }
 

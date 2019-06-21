@@ -16,9 +16,6 @@
 #import "TWeetCell.h"
 
 @interface ProfileViewController () <UITableViewDataSource, UITableViewDelegate>
-// MARK: Properties
-@property (nonatomic, strong) NSMutableArray *tweets;
-
 // MARK: Outlets
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @end
@@ -28,6 +25,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    
     [self.avatarImageView setImageWithURL: [self.user getAvatarURLString]];
     self.avatarImageView.layer.cornerRadius = 44;
     self.avatarImageView.layer.masksToBounds = YES;
@@ -37,14 +37,15 @@
     self.followersCountLabel.text = [NSString stringWithFormat:@"%@",self.user.followersCount];
     self.followingCountLabel.text = [NSString stringWithFormat:@"%@",self.user.followingCount];
     
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:refreshControl atIndex:0];
     
-    [self getTimeline];
+    // [self getTimeline];
+    
+//    for (Tweet *tweet in self.tweets) {
+//        NSLog(@"%@", tweet.text);
+//    }
 }
 
 // MARK: Table view
@@ -52,15 +53,13 @@
     return self.tweets.count;
 }
 
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell2"];
+    TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
     Tweet *tweet = self.tweets[indexPath.row];
     
-    // Call method for setting Tweet
     [cell refreshData:tweet];
     
-    NSLog(@"WE HERE WE HERE WE HERE");
-    NSLog(@"%@", tweet.text);
     cell.contentLabel.text = tweet.text;
     cell.dateLabel.text = tweet.createdAtString;
     cell.usernameLabel.text = tweet.user.name;
@@ -68,7 +67,6 @@
     
     return cell;
 }
-
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
