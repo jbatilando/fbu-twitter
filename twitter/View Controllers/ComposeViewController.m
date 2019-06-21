@@ -9,8 +9,9 @@
 #import "ComposeViewController.h"
 #import "APIManager.h"
 
-@interface ComposeViewController ()
+@interface ComposeViewController () <UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UITextView *tweetTextView;
+@property (weak, nonatomic) IBOutlet UILabel *tweetCharacterCountLeft;
 
 @end
 
@@ -19,8 +20,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.tweetTextView.delegate = self;
+    [self.tweetCharacterCountLeft setText:[NSString stringWithFormat:@"%d", 280]];
 }
 
+// MARK: Methods
+- (void)textViewDidChange:(UITextView *)textView {
+    NSInteger restrictedLength = 280;
+    NSString *temp = self.tweetTextView.text;
+    NSInteger lengthLeft = 280 - [[self.tweetTextView text] length];
+    [self.tweetCharacterCountLeft setText:[NSString stringWithFormat:@"%ld", (long)lengthLeft]];
+    
+    if([[self.tweetTextView text] length] > restrictedLength){
+        self.tweetTextView.text = [temp substringToIndex:[temp length] - 1];
+    }
+}
+
+// MARK: IBActions
 - (IBAction)closeButton:(id)sender {
     [self dismissViewControllerAnimated:true completion:nil];
 }
