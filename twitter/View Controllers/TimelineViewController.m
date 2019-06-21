@@ -17,13 +17,15 @@
 #import "User.h"
 #import "ProfileViewController.h"
 
-@interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 // MARK: Outlets
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 // MARK: Properties
 @property (nonatomic, strong) NSMutableArray *tweets;
 @property (nonatomic, strong) User *user;
+@property (nonatomic) BOOL isMoreDataLoading; // Configure retweet button
+@property (class, nonatomic, readonly) CGFloat defaultHeight;
 @end
 
 @implementation TimelineViewController
@@ -72,6 +74,28 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if(!self.isMoreDataLoading){
+        // Calculate the position of one screen length before the bottom of the results
+        int scrollViewContentHeight = self.tableView.contentSize.height;
+        int scrollOffsetThreshold = scrollViewContentHeight - self.tableView.bounds.size.height;
+        
+        // When the user has scrolled past the threshold, start requesting
+        if(scrollView.contentOffset.y > scrollOffsetThreshold && self.tableView.isDragging) {
+            self.isMoreDataLoading = YES;
+            NSLog(@"loading more tweets!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            [self getTimeline];
+        }
+    }
+}
+
+- (void)startAnimating {
+    
+}
+- (void)stopAnimating {
+    
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.tweets.count;
 }
@@ -79,6 +103,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
     Tweet *tweet = self.tweets[indexPath.row];
+    NSLog(@"%li", (long)indexPath.row);
     
     // Call method for setting Tweet
     [cell refreshData:tweet];
@@ -100,6 +125,7 @@
         if (tweets) {
             NSLog(@"😎😎😎 Successfully loaded home timeline");
             self.tweets = (NSMutableArray *)tweets;
+            self.isMoreDataLoading = NO;
             [self.tableView reloadData];
         } else {
             NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
