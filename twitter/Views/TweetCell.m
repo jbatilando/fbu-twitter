@@ -117,4 +117,10 @@
     }
 }
 
+- (IBAction)didTap:(UITapGestureRecognizer *)sender {
+    CGPoint location = [sender locationInView:self.avatarImageView];
+    NSLog(@"tapped image view");
+    // User tapped at the point above. Do something with that if you want.
+}
+
 @end
