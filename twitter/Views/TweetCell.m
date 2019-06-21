@@ -37,6 +37,9 @@
     [self.avatarImageView setImageWithURL: [tweet.user getAvatarURLString]];
     self.avatarImageView.layer.cornerRadius = 28;
     self.avatarImageView.layer.masksToBounds = YES;
+    self.commentCountLabel.text = [NSString stringWithFormat:@"%d",tweet.replyCount];
+    self.favoriteCountLabel.text = [NSString stringWithFormat:@"%d",tweet.favoriteCount];
+    self.retweetCountLabel.text = [NSString stringWithFormat:@"%d",tweet.retweetCount];
     
     
     if (_tweet.favorited) {
@@ -55,9 +58,10 @@
 
 // MARK: IBActions
 - (IBAction)didTapFavorite:(UIButton *)sender {
-    
     if (self.tweet.favorited) {
         [sender setImage:[UIImage imageNamed:@"favor-icon"] forState:UIControlStateNormal];
+        self.tweet.favoriteCount -= 1;
+        self.favoriteCountLabel.text = [NSString stringWithFormat:@"%d",self.tweet.favoriteCount];
         [[APIManager shared] unFavorite:self.tweet completion:^(Tweet *tweet, NSError *error) {
             if(error){
                 [sender setImage:[UIImage imageNamed:@"favor-icon-red"] forState:UIControlStateNormal];
@@ -70,6 +74,8 @@
         }];
     } else {
         [sender setImage:[UIImage imageNamed:@"favor-icon-red"] forState:UIControlStateNormal];
+        self.tweet.favoriteCount += 1;
+        self.favoriteCountLabel.text = [NSString stringWithFormat:@"%d",self.tweet.favoriteCount];
         [[APIManager shared] favorite:self.tweet completion:^(Tweet *tweet, NSError *error) {
             if(error){
                 [sender setImage:[UIImage imageNamed:@"favor-icon"] forState:UIControlStateNormal];
@@ -84,9 +90,11 @@
 
 }
 - (IBAction)didTapRetweet:(UIButton *)sender {
-    if (_tweet.retweeted) {
+    if (self.tweet.retweeted) {
         [sender setImage:[UIImage imageNamed:@"retweet-icon"] forState:UIControlStateNormal];
-        [[APIManager shared] unRetweet:_tweet completion:^(Tweet *modifiedTweet, NSError *error) {
+        self.tweet.retweetCount -= 1;
+        self.retweetCountLabel.text = [NSString stringWithFormat:@"%d",self.tweet.retweetCount];
+        [[APIManager shared] unRetweet:self.tweet completion:^(Tweet *modifiedTweet, NSError *error) {
             if(error != nil) {
                 [sender setImage:[UIImage imageNamed:@"retweet-icon-green"] forState:UIControlStateNormal];
                 NSLog(@"Error retweeting tweet: %@", error.localizedDescription);
@@ -96,7 +104,9 @@
         }];
     } else {
         [sender setImage:[UIImage imageNamed:@"retweet-icon-green"] forState:UIControlStateNormal];
-        [[APIManager shared] retweet:_tweet completion:^(Tweet *modifiedTweet, NSError *error) {
+        self.tweet.retweetCount += 1;
+        self.retweetCountLabel.text = [NSString stringWithFormat:@"%d",self.tweet.retweetCount];
+        [[APIManager shared] retweet:self.tweet completion:^(Tweet *modifiedTweet, NSError *error) {
             if(error != nil) {
                 [sender setImage:[UIImage imageNamed:@"retweet-icon"] forState:UIControlStateNormal];
                 NSLog(@"Error unretweeting tweet: %@", error.localizedDescription);

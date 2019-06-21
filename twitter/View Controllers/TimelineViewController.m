@@ -20,12 +20,10 @@
 @interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 // MARK: Outlets
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *logoutButton;
 
 // MARK: Properties
 @property (nonatomic, strong) NSMutableArray *tweets;
 @property (nonatomic, strong) User *user;
-@property (nonatomic, strong) NSString *profileImageURLString;
 @end
 
 @implementation TimelineViewController
@@ -79,7 +77,6 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
     Tweet *tweet = self.tweets[indexPath.row];
     
@@ -90,7 +87,6 @@
     cell.dateLabel.text = tweet.createdAtString;
     cell.usernameLabel.text = tweet.user.name;
     cell.screennameLabel.text = tweet.user.screenName;
-    // TO DO: Set profile picture
     
     return cell;
 }
