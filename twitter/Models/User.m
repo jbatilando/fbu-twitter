@@ -27,7 +27,9 @@
 }
 
 - (NSURL *) getAvatarURLString {
-    NSURL *posterURL = [NSURL URLWithString:[self avatarImageURLString]];
+    NSString *string = [self avatarImageURLString];
+    string = [string stringByReplacingOccurrencesOfString:@"normal.jpg" withString:@"bigger.jpg"];
+    NSURL *posterURL = [NSURL URLWithString: string];
     return posterURL;
 }
 
