@@ -11,7 +11,7 @@
 #import "DateTools.h"
 
 @implementation Tweet
-
+// Tweet initializer
 -(instancetype)initWithDictionary:(NSDictionary *)dictionary {
     self = [super init];
     if (self) {
@@ -25,6 +25,7 @@
             // Change tweet to original tweet
             dictionary = originalTweet;
         }
+        
         // Setting the properties for the Tweet object
         self.idStr = dictionary[@"id_str"];
         self.text = dictionary[@"text"];
@@ -47,10 +48,6 @@
         
         // Convert String to Date
         NSDate *date = [formatter dateFromString:createdAtOriginalString];
-        
-        // Configure output format
-        // formatter.dateStyle = NSDateFormatterShortStyle;
-        // formatter.timeStyle = NSDateFormatterNoStyle;
         
         // Pod that creates timeAgo
         NSString *ago = [date timeAgoSinceNow];

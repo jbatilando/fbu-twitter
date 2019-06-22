@@ -25,6 +25,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+// MARK: IBActions
 - (IBAction)didTapLogin:(id)sender {
     [[APIManager shared] loginWithCompletion:^(BOOL success, NSError *error) {
         if (success) {

@@ -27,7 +27,7 @@
 
 // MARK: Methods
 -(void)refreshData:(Tweet *)tweet{
-    _tweet = tweet;
+    self.tweet = tweet;
     
     // Set properties for Tweet
     self.usernameLabel.text = tweet.user.name;
@@ -41,7 +41,7 @@
     self.favoriteCountLabel.text = [NSString stringWithFormat:@"%d",tweet.favoriteCount];
     self.retweetCountLabel.text = [NSString stringWithFormat:@"%d",tweet.retweetCount];
     
-    
+    // Update UI based on if tweet if favorited or retweeted
     if (_tweet.favorited) {
         [self.likeButton setImage:[UIImage imageNamed:@"favor-icon-red"] forState:UIControlStateNormal];
     } else {
@@ -89,6 +89,7 @@
     }
 
 }
+
 - (IBAction)didTapRetweet:(UIButton *)sender {
     if (self.tweet.retweeted) {
         [sender setImage:[UIImage imageNamed:@"retweet-icon"] forState:UIControlStateNormal];

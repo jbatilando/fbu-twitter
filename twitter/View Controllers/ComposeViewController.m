@@ -19,20 +19,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
     self.tweetTextView.delegate = self;
     [self.tweetCharacterCountLeft setText:[NSString stringWithFormat:@"%d", 280]];
 }
 
 // MARK: Methods
+// Keep track of the number of characters the user has left
 - (void)textViewDidChange:(UITextView *)textView {
+    // Length of tweet can't exceed 280 characters
     NSInteger restrictedLength = 280;
-    NSString *temp = self.tweetTextView.text;
+    NSString *tweetText = self.tweetTextView.text;
     NSInteger lengthLeft = 280 - [[self.tweetTextView text] length];
     [self.tweetCharacterCountLeft setText:[NSString stringWithFormat:@"%ld", (long)lengthLeft]];
     
     if([[self.tweetTextView text] length] > restrictedLength){
-        self.tweetTextView.text = [temp substringToIndex:[temp length] - 1];
+        self.tweetTextView.text = [tweetText substringToIndex:[tweetText length] - 1];
     }
 }
 

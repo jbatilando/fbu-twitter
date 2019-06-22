@@ -30,9 +30,9 @@
 
 // MARK: IBActions
 - (IBAction)didTapRetweet:(id)sender {
-    if (_tweet.retweeted) {
+    if (self.tweet.retweeted) {
         [sender setImage:[UIImage imageNamed:@"retweet-icon"] forState:UIControlStateNormal];
-        [[APIManager shared] unRetweet:_tweet completion:^(Tweet *modifiedTweet, NSError *error) {
+        [[APIManager shared] unRetweet:self.tweet completion:^(Tweet *modifiedTweet, NSError *error) {
             if(error != nil) {
                 [sender setImage:[UIImage imageNamed:@"retweet-icon-green"] forState:UIControlStateNormal];
                 NSLog(@"Error retweeting tweet: %@", error.localizedDescription);
@@ -42,7 +42,7 @@
         }];
     } else {
         [sender setImage:[UIImage imageNamed:@"retweet-icon-green"] forState:UIControlStateNormal];
-        [[APIManager shared] retweet:_tweet completion:^(Tweet *modifiedTweet, NSError *error) {
+        [[APIManager shared] retweet:self.tweet completion:^(Tweet *modifiedTweet, NSError *error) {
             if(error != nil) {
                 [sender setImage:[UIImage imageNamed:@"retweet-icon"] forState:UIControlStateNormal];
                 NSLog(@"Error unretweeting tweet: %@", error.localizedDescription);
@@ -52,6 +52,7 @@
         }];
     }
 }
+
 - (IBAction)didTapLike:(id)sender {
     if (self.tweet.favorited) {
         [sender setImage:[UIImage imageNamed:@"favor-icon"] forState:UIControlStateNormal];

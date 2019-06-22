@@ -28,6 +28,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
+    // Set profile view with user stats
     [self.avatarImageView setImageWithURL: [self.user getAvatarURLString]];
     self.avatarImageView.layer.cornerRadius = 44;
     self.avatarImageView.layer.masksToBounds = YES;
@@ -37,15 +38,10 @@
     self.followersCountLabel.text = [NSString stringWithFormat:@"%@",self.user.followersCount];
     self.followingCountLabel.text = [NSString stringWithFormat:@"%@",self.user.followingCount];
     
+    // UIRefreshControl
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:refreshControl atIndex:0];
-    
-    // [self getTimeline];
-    
-//    for (Tweet *tweet in self.tweets) {
-//        NSLog(@"%@", tweet.text);
-//    }
 }
 
 // MARK: Table view
@@ -59,11 +55,6 @@
     Tweet *tweet = self.tweets[indexPath.row];
     
     [cell refreshData:tweet];
-    
-    cell.contentLabel.text = tweet.text;
-    cell.dateLabel.text = tweet.createdAtString;
-    cell.usernameLabel.text = tweet.user.name;
-    cell.screennameLabel.text = tweet.user.screenName;
     
     return cell;
 }

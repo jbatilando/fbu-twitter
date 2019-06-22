@@ -388,14 +388,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eS4-pc-P6a">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eS4-pc-P6a">
                                 <rect key="frame" x="0.0" y="64" width="375" height="193"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="375" id="CXK-CA-3ZJ"/>
                                     <constraint firstAttribute="height" constant="193" id="S2P-0U-h7f"/>
                                 </constraints>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bG5-d0-Nyx">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bG5-d0-Nyx">
                                 <rect key="frame" x="16" y="210" width="88" height="88"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="88" id="NC6-PJ-S4Z"/>
@@ -610,7 +610,7 @@
             </objects>
             <point key="canvasLocation" x="2462" y="37"/>
         </scene>
-        <!--Compose View Controller-->
+        <!--Tweet-->
         <scene sceneID="nBV-r6-Afb">
             <objects>
                 <viewController id="RJg-4b-QIb" customClass="ComposeViewController" sceneMemberID="viewController">
@@ -618,31 +618,45 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="K2t-89-ClB">
-                                <rect key="frame" x="0.0" y="64" width="375" height="201"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="K2t-89-ClB">
+                                <rect key="frame" x="0.0" y="64" width="375" height="172"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="172" id="VLs-NB-bcZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="brb-LG-0z6">
-                                <rect key="frame" x="166" y="236" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="280" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="brb-LG-0z6">
+                                <rect key="frame" x="16" y="244" width="29" height="20"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="characters left" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hkf-Qt-0yX">
+                                <rect key="frame" x="49" y="244" width="109" height="20"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="hkf-Qt-0yX" firstAttribute="leading" secondItem="brb-LG-0z6" secondAttribute="trailing" constant="4" id="682-bA-oZr"/>
+                            <constraint firstItem="brb-LG-0z6" firstAttribute="leading" secondItem="IA9-dW-9zY" secondAttribute="leading" constant="16" id="MKL-bV-Wxi"/>
+                            <constraint firstItem="K2t-89-ClB" firstAttribute="top" secondItem="IA9-dW-9zY" secondAttribute="top" id="URw-EF-Xk8"/>
+                            <constraint firstItem="brb-LG-0z6" firstAttribute="top" secondItem="K2t-89-ClB" secondAttribute="bottom" constant="8" id="afW-5h-nGZ"/>
+                            <constraint firstItem="hkf-Qt-0yX" firstAttribute="top" secondItem="brb-LG-0z6" secondAttribute="top" id="dhc-yM-va6"/>
+                            <constraint firstItem="K2t-89-ClB" firstAttribute="leading" secondItem="IA9-dW-9zY" secondAttribute="leading" id="emx-Oo-aB7"/>
+                            <constraint firstItem="K2t-89-ClB" firstAttribute="trailing" secondItem="IA9-dW-9zY" secondAttribute="trailing" id="mGi-Yy-ltM"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="IA9-dW-9zY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="tt6-dC-C33">
+                    <navigationItem key="navigationItem" title="Tweet" id="tt6-dC-C33">
                         <barButtonItem key="leftBarButtonItem" title="Close" image="close-icon" id="B0t-N2-UH3">
                             <connections>
                                 <action selector="closeButton:" destination="RJg-4b-QIb" id="fUa-W3-HcG"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Tweet" id="2kH-Ou-1Ya">
+                        <barButtonItem key="rightBarButtonItem" title="Share" id="2kH-Ou-1Ya">
                             <connections>
                                 <action selector="tweetButton:" destination="RJg-4b-QIb" id="fNg-9k-tML"/>
                             </connections>

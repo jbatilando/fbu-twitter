@@ -25,7 +25,6 @@
 @property (nonatomic, strong) NSMutableArray *tweets;
 @property (nonatomic, strong) User *user;
 @property (nonatomic) BOOL isMoreDataLoading; // Configure retweet button
-@property (class, nonatomic, readonly) CGFloat defaultHeight;
 @end
 
 @implementation TimelineViewController
@@ -89,13 +88,7 @@
     }
 }
 
-- (void)startAnimating {
-    
-}
-- (void)stopAnimating {
-    
-}
-
+// MARK: Table view
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.tweets.count;
 }
@@ -103,22 +96,18 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
     Tweet *tweet = self.tweets[indexPath.row];
-    NSLog(@"%li", (long)indexPath.row);
     
-    // Call method for setting Tweet
+    // Set tweet
     [cell refreshData:tweet];
-    
-    cell.contentLabel.text = tweet.text;
-    cell.dateLabel.text = tweet.createdAtString;
-    cell.usernameLabel.text = tweet.user.name;
-    cell.screennameLabel.text = tweet.user.screenName;
-    
+
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
+
+// MARK: Methods
 
 - (void)getTimeline {
     [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
