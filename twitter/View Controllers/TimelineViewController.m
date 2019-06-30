@@ -16,6 +16,7 @@
 #import "DetailsViewController.h"
 #import "User.h"
 #import "ProfileViewController.h"
+#import "TweetProfileViewController.h"
 
 @interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 // MARK: Outlets
@@ -25,6 +26,7 @@
 @property (nonatomic, strong) NSMutableArray *tweets;
 @property (nonatomic, strong) User *user;
 @property (nonatomic) BOOL isMoreDataLoading; // Configure retweet button
+@property (nonatomic) NSInteger index; // Configure retweet button
 @end
 
 @implementation TimelineViewController
@@ -60,8 +62,6 @@
     [[APIManager shared] getUser:^(User *user, NSError *error) {
         if (user) {
             self.user = (User *)user;
-            NSLog(@"Logged in as: %@", self.user.screenName);
-            NSLog(@"Hello: %@!", self.user.name);
         } else {
             NSLog(@"error getting user: %@", error.localizedDescription);
         }
@@ -82,7 +82,7 @@
         // When the user has scrolled past the threshold, start requesting
         if(scrollView.contentOffset.y > scrollOffsetThreshold && self.tableView.isDragging) {
             self.isMoreDataLoading = YES;
-            NSLog(@"loading more tweets!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            // Need to load more
             [self getTimeline];
         }
     }
@@ -97,8 +97,15 @@
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
     Tweet *tweet = self.tweets[indexPath.row];
     
+    // Tap on image
+    UITapGestureRecognizer *newTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapCellImage:)];
+    [cell.avatarImageView setUserInteractionEnabled:YES];
+    [cell.avatarImageView addGestureRecognizer:newTap];
+    
     // Set tweet
     [cell refreshData:tweet];
+    cell.avatarImageView.userInteractionEnabled = YES;
+    [cell.avatarImageView setUserInteractionEnabled:YES];
 
     return cell;
 }
@@ -108,7 +115,6 @@
 }
 
 // MARK: Methods
-
 - (void)getTimeline {
     [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
         if (tweets) {
@@ -131,6 +137,13 @@
     [self getTimeline];
     [self.tableView reloadData];
     [refreshControl endRefreshing];
+}
+
+- (void)didTapCellImage:(id)sender{
+    CGPoint location = [sender locationInView:self.tableView];
+    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:location];
+    self.index = indexPath.row;
+    [self performSegueWithIdentifier:@"tweetProfileSegue" sender:nil];
 }
 
 // MARK: IBActions
@@ -159,8 +172,14 @@
         profileViewController.user = self.user;
         profileViewController.tweets = self.tweets;
     }
+    else if ([[segue identifier] isEqualToString:@"tweetProfileSegue"]) {
+        TweetProfileViewController *profileViewController = [segue destinationViewController];
+        UITableViewCell *tappedCell = sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+        Tweet *tweet = self.tweets[self.index];
+        profileViewController.user = tweet.user;
+    }
 }
-
 
 
 @end

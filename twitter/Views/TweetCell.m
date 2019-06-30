@@ -34,21 +34,24 @@
     self.contentLabel.text = tweet.text;
     self.dateLabel.text = tweet.createdAtString;
     self.screennameLabel.text = tweet.user.screenName;
+    
     [self.avatarImageView setImageWithURL: [tweet.user getAvatarURLString]];
     self.avatarImageView.layer.cornerRadius = 28;
     self.avatarImageView.layer.masksToBounds = YES;
+    self.avatarImageView.userInteractionEnabled = YES;
+    
     self.commentCountLabel.text = [NSString stringWithFormat:@"%d",tweet.replyCount];
     self.favoriteCountLabel.text = [NSString stringWithFormat:@"%d",tweet.favoriteCount];
     self.retweetCountLabel.text = [NSString stringWithFormat:@"%d",tweet.retweetCount];
     
     // Update UI based on if tweet if favorited or retweeted
-    if (_tweet.favorited) {
+    if (self.tweet.favorited) {
         [self.likeButton setImage:[UIImage imageNamed:@"favor-icon-red"] forState:UIControlStateNormal];
     } else {
         [self.likeButton setImage:[UIImage imageNamed:@"favor-icon"] forState:UIControlStateNormal];
     }
     
-    if (_tweet.retweeted) {
+    if (self.tweet.retweeted) {
         [self.retweetButton setImage:[UIImage imageNamed:@"retweet-icon-green"] forState:UIControlStateNormal];
     } else {
         [self.retweetButton setImage:[UIImage imageNamed:@"retweet-icon"] forState:UIControlStateNormal];
@@ -118,10 +121,6 @@
     }
 }
 
-- (IBAction)didTap:(UITapGestureRecognizer *)sender {
-    CGPoint location = [sender locationInView:self.avatarImageView];
-    NSLog(@"tapped image view");
-    // User tapped at the point above. Do something with that if you want.
-}
+
 
 @end

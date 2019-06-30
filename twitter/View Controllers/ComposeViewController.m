@@ -47,7 +47,6 @@
     NSString *str = [self.tweetTextView text];
     
     [[APIManager shared]postStatusWithText:str completion:^(Tweet *tweet, NSError *error) {
-        
         if(error) {
             NSLog(@"Error composing Tweet: %@", error.localizedDescription);
         } else {
