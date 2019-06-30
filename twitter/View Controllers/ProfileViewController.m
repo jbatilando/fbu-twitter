@@ -28,15 +28,27 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-    // Set profile view with user stats
-    [self.avatarImageView setImageWithURL: [self.user getAvatarURLString]];
-    self.avatarImageView.layer.cornerRadius = 44;
-    self.avatarImageView.layer.masksToBounds = YES;
-    [self.bannerImageView setImageWithURL: [self.user getBannerURLString]];
-    self.usernameLabel.text = self.user.name;
-    self.screennameLabel.text = self.user.screenName;
-    self.followersCountLabel.text = [NSString stringWithFormat:@"%@",self.user.followersCount];
-    self.followingCountLabel.text = [NSString stringWithFormat:@"%@",self.user.followingCount];
+    NSLog(@"In profile");
+    
+    // Get user
+    [[APIManager shared] getUser:^(User *user, NSError *error) {
+        if (user) {
+            self.user = (User *)user;
+            NSLog(@"%@", self.user.name);
+            // Set profile view with user stats
+            [self.avatarImageView setImageWithURL: [self.user getAvatarURLString]];
+            self.avatarImageView.layer.cornerRadius = 44;
+            self.avatarImageView.layer.masksToBounds = YES;
+            [self.bannerImageView setImageWithURL: [self.user getBannerURLString]];
+            self.usernameLabel.text = self.user.name;
+            self.screennameLabel.text = self.user.screenName;
+            self.followersCountLabel.text = [NSString stringWithFormat:@"%@",self.user.followersCount];
+            self.followingCountLabel.text = [NSString stringWithFormat:@"%@",self.user.followingCount];
+            [self getTimeline];
+        } else {
+            NSLog(@"error getting user: %@", error.localizedDescription);
+        }
+    }];
     
     // UIRefreshControl
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
@@ -53,9 +65,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
     Tweet *tweet = self.tweets[indexPath.row];
-    
     [cell refreshData:tweet];
-    
     return cell;
 }
 

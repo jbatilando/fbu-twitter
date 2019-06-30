@@ -48,7 +48,7 @@
                         <viewLayoutGuide key="safeArea" id="osx-NC-afp"/>
                     </view>
                     <connections>
-                        <segue destination="FTQ-G1-N2b" kind="presentation" identifier="loginSegue" id="CHf-4w-b5m"/>
+                        <segue destination="O6C-cn-eDd" kind="presentation" identifier="loginSegue" id="CHf-4w-b5m"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hKJ-HH-8tn" sceneMemberID="firstResponder"/>
@@ -181,7 +181,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ikf-7f-9Lf">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TweetCell" rowHeight="119" id="OdJ-Jn-n1s" customClass="TweetCell">
@@ -380,9 +380,9 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oQh-hN-GQg" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="Mj8-Fa-ogy"/>
             </objects>
-            <point key="canvasLocation" x="1660" y="36.431784107946029"/>
+            <point key="canvasLocation" x="2599.1999999999998" y="36.431784107946029"/>
         </scene>
-        <!--Profile View Controller-->
+        <!--Item-->
         <scene sceneID="e4w-i1-3GK">
             <objects>
                 <viewController id="JG7-U5-xnM" customClass="ProfileViewController" sceneMemberID="viewController">
@@ -446,7 +446,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hT5-6c-iQt">
-                                <rect key="frame" x="0.0" y="379" width="375" height="288"/>
+                                <rect key="frame" x="0.0" y="379" width="375" height="239"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TweetCell" rowHeight="112" id="ghg-BZ-leG" customClass="TweetCell">
@@ -598,6 +598,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="a5n-om-9gs"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="yO7-Dy-5Yd"/>
                     <connections>
                         <outlet property="avatarImageView" destination="bG5-d0-Nyx" id="ILV-5O-rPz"/>
                         <outlet property="bannerImageView" destination="eS4-pc-P6a" id="f0H-F0-dpe"/>
@@ -610,7 +611,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EMH-JX-gux" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2462" y="37"/>
+            <point key="canvasLocation" x="3400.8000000000002" y="36.431784107946029"/>
         </scene>
         <!--Tweet-->
         <scene sceneID="nBV-r6-Afb">
@@ -761,10 +762,11 @@
             </objects>
             <point key="canvasLocation" x="2464.8000000000002" y="749.7751124437782"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Home-->
         <scene sceneID="WUT-Ke-VeR">
             <objects>
-                <navigationController storyboardIdentifier="TweetsNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="FTQ-G1-N2b" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="FTQ-G1-N2b" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Home" selectedImage="home-icon" id="3XP-sw-TNR"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ytz-Ev-cUB">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -777,7 +779,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JHS-35-jFs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="860" y="36.431784107946029"/>
+            <point key="canvasLocation" x="1799.2" y="36.431784107946029"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="JIS-ag-wBg">
@@ -797,6 +799,24 @@
             </objects>
             <point key="canvasLocation" x="836" y="748"/>
         </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="E1I-dV-PYU">
+            <objects>
+                <tabBarController storyboardIdentifier="Home" automaticallyAdjustsScrollViewInsets="NO" id="O6C-cn-eDd" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="UWd-a6-2XF">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="FTQ-G1-N2b" kind="relationship" relationship="viewControllers" id="zpQ-kr-0F0"/>
+                        <segue destination="JG7-U5-xnM" kind="relationship" relationship="viewControllers" id="F5y-Us-jX2"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SFT-0M-AgO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="858" y="37"/>
+        </scene>
     </scenes>
     <resources>
         <image name="TwitterLogoBlue" width="200" height="200"/>
@@ -804,8 +824,12 @@
         <image name="close-icon" width="26" height="24"/>
         <image name="edit-icon" width="30" height="27"/>
         <image name="favor-icon" width="30" height="30"/>
+        <image name="home-icon" width="30" height="30"/>
         <image name="message-icon" width="30" height="30"/>
         <image name="reply-icon" width="30" height="30"/>
         <image name="retweet-icon" width="30" height="30"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="x8P-V1-Gq9"/>
+    </inferredMetricsTieBreakers>
 </document>

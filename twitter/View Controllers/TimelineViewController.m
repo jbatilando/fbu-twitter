@@ -167,11 +167,6 @@
         Tweet *tweet = self.tweets[indexPath.row];
         detailsPostViewController.tweet = tweet;
     }
-    else if ([[segue identifier] isEqualToString:@"profileSegue"]) {
-        ProfileViewController *profileViewController = [segue destinationViewController];
-        profileViewController.user = self.user;
-        profileViewController.tweets = self.tweets;
-    }
     else if ([[segue identifier] isEqualToString:@"tweetProfileSegue"]) {
         TweetProfileViewController *profileViewController = [segue destinationViewController];
         UITableViewCell *tappedCell = sender;

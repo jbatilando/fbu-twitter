@@ -36,7 +36,7 @@ The following **optional** features are implemented:
 - [x] After creating a new tweet, a user should be able to view it in the timeline immediately without refetching the timeline from the network.
 - [ ] User can reply to any tweet, and replies should be prefixed with the username and the reply_id should be set when posting the tweet (**2 points**)
 - [ ] User sees embedded images in tweet if available
-- [ ] User can switch between timeline, mentions, or profile view through a tab bar (**3 points**)
+- [x] User can switch between timeline, mentions, or profile view through a tab bar (**3 points**)
 - [ ] Profile Page: pulling down the profile page should blur and resize the header image. (**4 points**)
 
 
