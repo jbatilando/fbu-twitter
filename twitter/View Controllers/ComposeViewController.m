@@ -12,7 +12,6 @@
 @interface ComposeViewController () <UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UITextView *tweetTextView;
 @property (weak, nonatomic) IBOutlet UILabel *tweetCharacterCountLeft;
-
 @end
 
 @implementation ComposeViewController
@@ -22,6 +21,19 @@
     
     self.tweetTextView.delegate = self;
     [self.tweetCharacterCountLeft setText:[NSString stringWithFormat:@"%d", 280]];
+    
+    if (self.replyToTweet == nil) {
+        NSLog(@"not a reply");
+    } else {
+        NSLog(@"YAS");
+        NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+        f.numberStyle = NSNumberFormatterDecimalStyle;
+        NSNumber *myNumber = [f numberFromString:self.replyToTweet.idStr];
+        NSLog(@"%@", myNumber);
+        NSLog(@"%@", self.replyToTweet.idStr);
+        NSLog(@"%@", self.replyToTweet.text);
+    }
+        
 }
 
 // MARK: Methods
@@ -44,9 +56,22 @@
 }
 
 - (IBAction)tweetButton:(id)sender {
-    NSString *str = [self.tweetTextView text];
     
-    [[APIManager shared]postStatusWithText:str completion:^(Tweet *tweet, NSError *error) {
+    if (self.replyToTweet != nil) {
+        NSLog(@"not a reply");
+    }
+    
+    NSString *repliedToUser = @" @";
+    repliedToUser = [repliedToUser stringByAppendingString:self.replyToTweet.user.screenName]; // @mbatilando
+    
+    NSString *str = [self.tweetTextView text];
+    str = [str stringByAppendingString:repliedToUser];
+    
+    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+    f.numberStyle = NSNumberFormatterDecimalStyle;
+    NSNumber *myNumber = [f numberFromString:self.replyToTweet.idStr];
+    
+    [[APIManager shared]postStatusWithText:str replyID:myNumber completion:^(Tweet *tweet, NSError *error) {
         if(error) {
             NSLog(@"Error composing Tweet: %@", error.localizedDescription);
         } else {
@@ -54,7 +79,7 @@
             [self dismissViewControllerAnimated: YES completion:nil];
             NSLog(@"Compose Tweet Success!");
         }
-        
+
     }];
 }
 

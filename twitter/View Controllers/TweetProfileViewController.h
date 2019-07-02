@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TweetProfileViewController : UIViewController
 // MARK: Properties
 @property (nonatomic, strong) User *user;
+@property (nonatomic, strong) NSMutableArray *tweets;
+
 
 // MARK: Outlets
 @property (weak, nonatomic) IBOutlet UIImageView *bannerImageView;

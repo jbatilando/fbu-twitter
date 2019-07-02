@@ -11,15 +11,18 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+// MARK: Protocol
 @protocol ComposeViewControllerDelegate
 // MARK: Methods
 - (void)didTweet:(Tweet *)tweet;
 
 @end
 
+// MARK: Interface
 @interface ComposeViewController : UIViewController
 // MARK: Properties
 @property (nonatomic, weak) id<ComposeViewControllerDelegate> delegate;
+@property (nonatomic, strong) Tweet *replyToTweet;
 @end
 
 NS_ASSUME_NONNULL_END

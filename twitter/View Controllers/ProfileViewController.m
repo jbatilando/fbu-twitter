@@ -28,8 +28,6 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-    NSLog(@"In profile");
-    
     // Get user
     [[APIManager shared] getUser:^(User *user, NSError *error) {
         if (user) {

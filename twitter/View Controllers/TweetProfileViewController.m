@@ -8,8 +8,13 @@
 
 #import "TweetProfileViewController.h"
 #import "UIImageView+AFNetworking.h"
+#import "APIManager.h"
+#import "Tweet.h"
+#import "TWeetCell.h"
 
 @interface TweetProfileViewController ()
+// MARK: Outlet
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
@@ -28,6 +33,38 @@
     self.usernameLabel.text = self.user.screenName;
     self.followersCountLabel.text = [NSString stringWithFormat:@"%@",self.user.followersCount];
     self.followingCountLabel.text = [NSString stringWithFormat:@"%@",self.user.followingCount];
+    
+    [self getTimeline];
+}
+
+// MARK: Methods
+- (void)getTimeline {
+    [[APIManager shared] getOtherHomeTimelineWithCompletion:^(User *user, NSArray *tweets, NSError *error) {
+        if (tweets) {
+            NSLog(@"😎😎😎 Successfully loaded home timeline");
+            self.tweets = (NSMutableArray *)tweets;
+            [self.tableView reloadData];
+        } else {
+            NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
+        }
+    }];
+}
+
+// MARK: Table view
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.tweets.count;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
+    Tweet *tweet = self.tweets[indexPath.row];
+    [cell refreshData:tweet];
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 /*
