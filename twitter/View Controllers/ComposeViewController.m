@@ -21,18 +21,6 @@
     
     self.tweetTextView.delegate = self;
     [self.tweetCharacterCountLeft setText:[NSString stringWithFormat:@"%d", 280]];
-    
-    if (self.replyToTweet == nil) {
-        NSLog(@"not a reply");
-    } else {
-        NSLog(@"YAS");
-        NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
-        f.numberStyle = NSNumberFormatterDecimalStyle;
-        NSNumber *myNumber = [f numberFromString:self.replyToTweet.idStr];
-        NSLog(@"%@", myNumber);
-        NSLog(@"%@", self.replyToTweet.idStr);
-        NSLog(@"%@", self.replyToTweet.text);
-    }
         
 }
 
@@ -56,20 +44,18 @@
 }
 
 - (IBAction)tweetButton:(id)sender {
-    
-    if (self.replyToTweet != nil) {
-        NSLog(@"not a reply");
+    NSString *str = [self.tweetTextView text];
+    if (self.replyToTweet) {
+        NSString *repliedToUser = @" @";
+        repliedToUser = [repliedToUser stringByAppendingString:self.replyToTweet.user.screenName]; // @mbatilando
+        str = [str stringByAppendingString:repliedToUser];
     }
     
-    NSString *repliedToUser = @" @";
-    repliedToUser = [repliedToUser stringByAppendingString:self.replyToTweet.user.screenName]; // @mbatilando
-    
-    NSString *str = [self.tweetTextView text];
-    str = [str stringByAppendingString:repliedToUser];
-    
+    // Format string to 64-bit Int
     NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
     f.numberStyle = NSNumberFormatterDecimalStyle;
     NSNumber *myNumber = [f numberFromString:self.replyToTweet.idStr];
+
     
     [[APIManager shared]postStatusWithText:str replyID:myNumber completion:^(Tweet *tweet, NSError *error) {
         if(error) {

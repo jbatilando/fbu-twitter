@@ -24,6 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) User *user; // Contains name, screenname, etc. of tweet author
 @property (strong, nonatomic) NSString *createdAtString; // Display date
 @property (nonatomic) NSString *replyIDString;
+@property (strong, nonatomic) NSArray *entities; // Display date
+@property (strong, nonatomic) NSArray *media; // Display date
 
 // For Retweets
 @property (strong, nonatomic) User *retweetedByUser;  // user who retweeted if tweet is retweet

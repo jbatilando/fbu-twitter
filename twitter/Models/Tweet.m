@@ -34,11 +34,15 @@
         self.retweetCount = [dictionary[@"retweet_count"] intValue];
         self.retweeted = [dictionary[@"retweeted"] boolValue];
         self.replyCount = [dictionary[@"reply_count"] intValue];
+        self.entities = dictionary[@"entities"];
         
-        if ([NSNull null] != [dictionary objectForKey:@"in_reply_to_status_id_str"]) {
-            self.replyIDString = dictionary[@"in_reply_to_status_id_str"];
+        if ([NSNull null] != [dictionary objectForKey:@"in_reply_to_status_id"]) {
+            self.replyIDString = dictionary[@"in_reply_to_status_id"];
+        } else {
+            self.replyIDString = @"0";
         }
-        // self.replyIDString = [dictionary[@"in_reply_to_status_id"] intValue];
+        
+        
         
         // initialize the user
         NSDictionary *user = dictionary[@"user"];

@@ -95,9 +95,14 @@ static NSString * const consumerSecret = @"kyq66rE7zyg21ak0hSlrRVCOwC5tqND9u8H2D
 }
 
 // Tweet user's tweet
-- (void)postStatusWithText:(NSString *)text replyID:(NSNumber *)replyToTweetID completion:(void (^)(Tweet *, NSError *))completion{
+- (void)postStatusWithText:(NSString *)text replyID:(nullable NSNumber *)replyToTweetID completion:(void (^)(Tweet *, NSError *))completion{
     NSString *urlString = @"1.1/statuses/update.json";
-    NSDictionary *parameters = @{@"status": text, @"in_reply_to_status_id": replyToTweetID};
+    NSDictionary *parameters = [[NSDictionary alloc] init];
+    if (replyToTweetID == nil) {
+       parameters = @{@"status": text};
+    } else {
+       parameters = @{@"status": text, @"in_reply_to_status_id": replyToTweetID};
+    }
     
     [self POST:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable tweetDictionary) {
         Tweet *tweet = [[Tweet alloc]initWithDictionary:tweetDictionary];

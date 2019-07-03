@@ -104,7 +104,17 @@
     
     // Set tweet
     [cell refreshData:tweet];
-    cell.avatarImageView.userInteractionEnabled = YES;
+    
+//    NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:tweet.text];
+//    [str addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:NSMakeRange(0,5)];
+//    [str addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(6,12)];
+//    [str addAttribute:NSForegroundColorAttributeName value:[UIColor greenColor] range:NSMakeRange(19,6)];
+//    [str addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Arial-BoldItalicMT" size:30.0] range:NSMakeRange(0, 5)];
+//    [str addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-Bold" size:30.0] range:NSMakeRange(6, 12)];
+//    [str addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Courier-BoldOblique" size:30.0] range:NSMakeRange(19, 6)];
+//    cell.contentLabel.attributedText = str;
+    
+//    cell.avatarImageView.userInteractionEnabled = YES;
     [cell.avatarImageView setUserInteractionEnabled:YES];
 
     return cell;
@@ -120,6 +130,11 @@
         if (tweets) {
             NSLog(@"😎😎😎 Successfully loaded home timeline");
             self.tweets = (NSMutableArray *)tweets;
+            
+            for (Tweet *tweet in self.tweets) {
+                NSLog(@"%@", tweet.entities);
+            }
+            
             self.isMoreDataLoading = NO;
             [self.tableView reloadData];
         } else {

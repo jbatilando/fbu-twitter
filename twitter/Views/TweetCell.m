@@ -30,8 +30,14 @@
     self.tweet = tweet;
     
     // Set properties for Tweet
-    self.usernameLabel.text = tweet.user.name;
+    self.contentLabel.enabledTextCheckingTypes = NSTextCheckingTypeLink;
+    self.contentLabel.delegate = self;
+    NSAttributedString *str = [[NSAttributedString alloc] initWithString:self.tweet.text];
+    self.contentLabel.attributedText = str;
+    
     self.contentLabel.text = tweet.text;
+    
+    self.usernameLabel.text = tweet.user.name;
     self.dateLabel.text = tweet.createdAtString;
     self.screennameLabel.text = tweet.user.screenName;
     
@@ -43,6 +49,7 @@
     self.commentCountLabel.text = [NSString stringWithFormat:@"%d",tweet.replyCount];
     self.favoriteCountLabel.text = [NSString stringWithFormat:@"%d",tweet.favoriteCount];
     self.retweetCountLabel.text = [NSString stringWithFormat:@"%d",tweet.retweetCount];
+
     
     // Update UI based on if tweet if favorited or retweeted
     if (self.tweet.favorited) {
@@ -57,6 +64,16 @@
         [self.retweetButton setImage:[UIImage imageNamed:@"retweet-icon"] forState:UIControlStateNormal];
     }
 
+}
+
+/// MARK: TTTAttributedLabel
+- (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithTextCheckingResult:(NSTextCheckingResult *)result {
+    NSString* textClicked = [label.text substringWithRange:result.range];
+    
+    //Get the URL and perform further actions
+    NSURL* urlClicked = result.URL;
+    UIApplication *application = [UIApplication sharedApplication];
+    [application openURL:urlClicked options:@{} completionHandler:nil];
 }
 
 // MARK: IBActions
