@@ -104,7 +104,19 @@
     
     // Set tweet
     [cell refreshData:tweet];
-
+    
+    if (cell.tweet.favorited) {
+        [cell.likeButton setSelected:YES];
+    } else {
+        [cell.likeButton setSelected:NO];
+    }
+    
+    if (cell.tweet.retweeted) {
+        [cell.retweetButton setSelected:YES];
+    } else {
+        [cell.retweetButton setSelected:NO];
+    }
+    
     [cell.avatarImageView setUserInteractionEnabled:YES];
 
     return cell;

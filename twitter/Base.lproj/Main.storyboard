@@ -257,6 +257,7 @@
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nkA-W6-nuq">
                                                             <rect key="frame" x="81.5" y="0.0" width="30" height="30"/>
                                                             <state key="normal" image="retweet-icon"/>
+                                                            <state key="selected" image="retweet-icon-green"/>
                                                             <connections>
                                                                 <action selector="didTapRetweet:" destination="OdJ-Jn-n1s" eventType="touchUpInside" id="2j5-C7-Bwb"/>
                                                             </connections>
@@ -270,6 +271,7 @@
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0tA-wz-dFS">
                                                             <rect key="frame" x="163" y="0.0" width="30" height="30"/>
                                                             <state key="normal" image="favor-icon"/>
+                                                            <state key="selected" image="favor-icon-red"/>
                                                             <connections>
                                                                 <action selector="didTapFavorite:" destination="OdJ-Jn-n1s" eventType="touchUpInside" id="uRm-yH-G7t"/>
                                                             </connections>
@@ -948,10 +950,12 @@
         <image name="close-icon" width="26" height="24"/>
         <image name="edit-icon" width="30" height="27"/>
         <image name="favor-icon" width="30" height="30"/>
+        <image name="favor-icon-red" width="30" height="30"/>
         <image name="home-icon" width="30" height="30"/>
         <image name="message-icon" width="30" height="30"/>
         <image name="reply-icon" width="30" height="30"/>
         <image name="retweet-icon" width="30" height="30"/>
+        <image name="retweet-icon-green" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="LJx-Ha-ljc"/>
